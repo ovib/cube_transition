@@ -9,6 +9,7 @@ The issue was that a Stack() is used in CubeWidget class. This is needed for the
 
 The solution was simply to check if the user is currently scrolling or not and, if a scroll is in progress render the accual Stack with the effect, othersie render only the accual widget. 
 
-<p align="center">
-  <img src="https://media.giphy.com/media/gsnmnzFDRzGZZwJxGa/giphy.gif">
-</p>
+
+  ![cube demo](https://user-images.githubusercontent.com/38936570/177825545-c688681f-ab7a-4307-a4c8-891f3ebc0177.gif)
+
+
