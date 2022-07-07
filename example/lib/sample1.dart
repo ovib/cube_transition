@@ -9,6 +9,7 @@ class Sample1 extends StatelessWidget {
         title: Text('Navigator Cube Transition'),
       ),
       body: Center(
+        // ignore: deprecated_member_use
         child: RaisedButton(
           child: Text('Next Page'),
           onPressed: () {

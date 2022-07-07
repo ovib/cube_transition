@@ -36,9 +36,13 @@ class Sample2 extends StatelessWidget {
                                 blurRadius: 5,
                               ),
                             ]),
-                            child: Text(
-                              item.name,
-                              style: Theme.of(context).textTheme.title,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                print("CLICK");
+                              },
+                              child: Text(
+                                item.name,
+                              ),
                             ),
                           ),
                         ),

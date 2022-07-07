@@ -113,6 +113,7 @@ class _CubePageViewState extends State<CubePageView> {
                 child: widget.children[index],
                 index: index,
                 pageNotifier: value,
+                isScrolling: _pageController.position.isScrollingNotifier.value,
               );
             },
           ),
@@ -135,15 +136,19 @@ class CubeWidget extends StatelessWidget {
   /// Child you want to use inside the Cube
   final Widget child;
 
+  final bool isScrolling;
+
   const CubeWidget({
     Key key,
     @required this.index,
     @required this.pageNotifier,
     @required this.child,
+    @required this.isScrolling,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print("isScrolling $isScrolling");
     final isLeaving = (index - pageNotifier) <= 0;
     final t = (index - pageNotifier);
     final rotationY = lerpDouble(0, 90, t);
@@ -151,25 +156,27 @@ class CubeWidget extends StatelessWidget {
     final transform = Matrix4.identity();
     transform.setEntry(3, 2, 0.003);
     transform.rotateY(-degToRad(rotationY));
-    return Transform(
-      alignment: isLeaving ? Alignment.centerRight : Alignment.centerLeft,
-      transform: transform,
-      child: Stack(
-        children: [
-          child,
-          Positioned.fill(
-            child: Opacity(
-              opacity: opacity,
-              child: Container(
-                child: Container(
-                  color: Colors.black87,
+    return isScrolling
+        ? Transform(
+            alignment: isLeaving ? Alignment.centerRight : Alignment.centerLeft,
+            transform: transform,
+            child: Stack(
+              children: [
+                child,
+                Positioned.fill(
+                  child: Opacity(
+                    opacity: opacity,
+                    child: Container(
+                      child: Container(
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-          ),
-        ],
-      ),
-    );
+          )
+        : child;
   }
 }
 
